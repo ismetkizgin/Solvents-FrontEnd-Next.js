@@ -11,6 +11,8 @@
         "@zeit/next-css": "^1.0.1",
         "next": "^9.3.4",
         "react": "^16.13.1",
-        "react-dom": "^16.13.1"
+        "react-dom": "^16.13.1",
+        "mysql": "^2.18.1",
+        "node-mysql-helper": "^0.6.7"
     }
 }
