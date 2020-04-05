@@ -1,6 +1,6 @@
+import fetch from 'isomorphic-unfetch'
 import Layout from '../components/_layout';
-import Random from '../public/js/random';
-import countdownSolver from '../public/solvent/countdownsolver';
+import { randomNumber } from '../public/js/random';
 
 const isInputNumberOne = (evt) => {
     var ch = String.fromCharCode(evt.which);
@@ -31,49 +31,53 @@ const getCountdownSolver = async () => {
         numbers[i] = parseInt($('#NumberInput' + i).val());
     }
     target = parseInt($('#TargetNumberInput').val());
-    $('#result').html(await countdownSolver(numbers, target));
+
+    const res = await fetch(`http://localhost:5000/countdownsolver/${numbers}/${target}`);
+    const data = await res.json();
+
+    $('#result').html(data.result);
 }
 
 function CountdownSolverPage() {
-    return (<Layout>
+    return (<Layout title='Sayı Bulma'>
         <div className="container">
             <h1>SAYI HESAPLAYICI</h1>
 
             <div className="row">
                 <div className="col-md-2">
-                    <input id='NumberInput1' className="Number" type="text" onKeyPress={() => isInputNumberOne(event)} maxlength="1" placeholder="Sayi 1" required />
+                    <input id='NumberInput1' className="Number" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 1" required />
 
                 </div>
                 <div className="col-md-2">
-                    <input id='NumberInput2' className="Number" type="text" onKeyPress={() => isInputNumberOne(event)} maxlength="1" placeholder="Sayi 2" required />
+                    <input id='NumberInput2' className="Number" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 2" required />
 
                 </div>
                 <div className="col-md-2">
-                    <input id='NumberInput3' className="Number" type="text" onKeyPress={() => isInputNumberOne(event)} maxlength="1" placeholder="Sayi 3" required />
+                    <input id='NumberInput3' className="Number" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 3" required />
 
                 </div>
                 <div className="col-md-2">
-                    <input id='NumberInput4' className="Number" type="text" onKeyPress={() => isInputNumberOne(event)} maxlength="1" placeholder="Sayi 4" required />
+                    <input id='NumberInput4' className="Number" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 4" required />
 
                 </div>
                 <div className="col-md-2">
-                    <input id='NumberInput5' className="Number" type="text" onKeyPress={() => isInputNumberOne(event)} maxlength="1" placeholder="Sayi 5" required />
+                    <input id='NumberInput5' className="Number" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 5" required />
 
                 </div>
                 <div className="col-md-2">
-                    <input id='NumberInput6' className="Number" type="text" onKeyPress={() => isInputNumberTwo(event)} maxlength="2" placeholder="Sayi 6" required />
+                    <input id='NumberInput6' className="Number" type="text" onKeyPress={() => isInputNumberTwo(event)} maxLength="2" placeholder="Sayi 6" required />
                 </div>
             </div>
 
             <div className="row">
                 <div className="col-md-12">
-                    <input id='TargetNumberInput' className="target" type="text" onKeyPress={() => isInputNumberThree(event)} maxlength="3" placeholder="Hedef Sayi" required />
+                    <input id='TargetNumberInput' className="target" type="text" onKeyPress={() => isInputNumberThree(event)} maxLength="3" placeholder="Hedef Sayi" required />
 
                 </div>
             </div>
             <div className="row">
                 <div className="col-md-6">
-                    <button onClick={() => Random.randomNumber()} type="button"> Rastgele Sayı Oluştur </button>
+                    <button onClick={() => randomNumber()} type="button"> Rastgele Sayı Oluştur </button>
 
                 </div>
                 <div className="col-md-6">
