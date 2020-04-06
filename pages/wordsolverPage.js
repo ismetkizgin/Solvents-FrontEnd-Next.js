@@ -1,6 +1,6 @@
-import fetch from 'isomorphic-unfetch'
 import Layout from '../components/_layout';
 import { randomLetter } from '../public/js/random';
+import Request from '../api/request';
 
 const keyUp = () => {
     $(".Letter").keyup(function () {
@@ -10,16 +10,13 @@ const keyUp = () => {
     });
 }
 
-
 const getWordSolver = async () => {
     let letters = [];
     for (let i = 0; i < 8; i++) {
         letters[i] = $('#LetterInput' + (i + 1)).val();
     }
 
-    const res = await fetch(`http://localhost:5000/wordsolver/` + letters);
-    const data = await res.json();
-
+    const data = await Request('/wordsolver/' + letters);
     $('.target').val(data.word);
 }
 

@@ -1,6 +1,6 @@
-import fetch from 'isomorphic-unfetch'
 import Layout from '../components/_layout';
 import { randomNumber } from '../public/js/random';
+import Request from '../api/request';
 
 const isInputNumberOne = (evt) => {
     var ch = String.fromCharCode(evt.which);
@@ -27,14 +27,12 @@ const getCountdownSolver = async () => {
     let numbers = [];
     let target;
 
-    for (let i = 0; i <= 6; i++) {
-        numbers[i] = parseInt($('#NumberInput' + i).val());
+    for (let i = 0; i < 6; i++) {
+        numbers[i] = parseInt($('#NumberInput' + (i +1)).val());
     }
     target = parseInt($('#TargetNumberInput').val());
-
-    const res = await fetch(`http://localhost:5000/countdownsolver/${numbers}/${target}`);
-    const data = await res.json();
-
+    
+    const data = await Request('/countdownsolver/'+ numbers + '/' + target);
     $('#result').html(data.result);
 }
 
