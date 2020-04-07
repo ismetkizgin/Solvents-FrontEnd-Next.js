@@ -17,7 +17,7 @@ app.prepare()
         });
 
         server.get('/sayicozucu', (req,res) => {
-            app.render(req,res,'/wordsolverPage');
+            app.render(req,res,'/countdownsolverPage');
         });
 
         server.get('*', (req, res) => {
