@@ -1,6 +1,7 @@
 import Layout from '../components/_layout';
 import { randomNumber } from '../public/js/random';
 import Request from '../api/request';
+import Link from 'next/link'
 
 const isInputNumberOne = (evt) => {
     var ch = String.fromCharCode(evt.which);
@@ -28,79 +29,83 @@ const getCountdownSolver = async () => {
     let target;
 
     for (let i = 0; i < 6; i++) {
-        numbers[i] = parseInt($('#NumberInput' + (i +1)).val());
+        numbers[i] = parseInt($('#NumberInput' + (i + 1)).val());
     }
     target = parseInt($('#TargetNumberInput').val());
-    
-    const data = await Request('/countdownsolver/'+ numbers + '/' + target);
+
+    const data = await Request('/countdownsolver/' + numbers + '/' + target);
     $('#result').html(data.result);
 }
 
 function CountdownSolverPage() {
-    return (<Layout title='Sayı Bulma'>
-        <div className="container">
-            <h1>SAYI HESAPLAYICI</h1>
+    return (<Layout title='Sayı Çözücü'>
+        <Link href="/"><a className="d-flex justify-content-start align-items-center icon"><i className="fas fa-chevron-circle-left"></i></a></Link>
 
-            <div className="row">
-                <div className="col-md-2">
-                    <input id='NumberInput1' className="Number" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 1" required />
+            <div className="container">
+                <h1>SAYI ÇÖCÜZÜ</h1>
+                <div className="row">
+                    <div className="col-md-2">
+                        <input id='NumberInput1' className="input" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 1" required />
 
+                    </div>
+                    <div className="col-md-2">
+                        <input id='NumberInput2' className="input" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 2" required />
+
+                    </div>
+                    <div className="col-md-2">
+                        <input id='NumberInput3' className="input" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 3" required />
+
+                    </div>
+                    <div className="col-md-2">
+                        <input id='NumberInput4' className="input" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 4" required />
+
+                    </div>
+                    <div className="col-md-2">
+                        <input id='NumberInput5' className="input" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 5" required />
+
+                    </div>
+                    <div className="col-md-2">
+                        <input id='NumberInput6' className="input" type="text" onKeyPress={() => isInputNumberTwo(event)} maxLength="2" placeholder="Sayi 6" required />
+                    </div>
                 </div>
-                <div className="col-md-2">
-                    <input id='NumberInput2' className="Number" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 2" required />
 
-                </div>
-                <div className="col-md-2">
-                    <input id='NumberInput3' className="Number" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 3" required />
+                <div className="row">
+                    <div className="col-md-12">
+                        <input id='TargetNumberInput' className="target" type="text" onKeyPress={() => isInputNumberThree(event)} maxLength="3" placeholder="Hedef Sayi" required />
 
+                    </div>
                 </div>
-                <div className="col-md-2">
-                    <input id='NumberInput4' className="Number" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 4" required />
 
-                </div>
-                <div className="col-md-2">
-                    <input id='NumberInput5' className="Number" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 5" required />
+                <div className="row">
+                    <div className="col-md-6">
+                        <button onClick={() => randomNumber()} className="button" type="button"> Rastgele Sayı Oluştur </button>
 
+                    </div>
+                    <div className="col-md-6">
+                        <button onClick={() => getCountdownSolver()} className="button" type="button"> Sonuçları Görüntüle </button>
+
+                    </div>
                 </div>
-                <div className="col-md-2">
-                    <input id='NumberInput6' className="Number" type="text" onKeyPress={() => isInputNumberTwo(event)} maxLength="2" placeholder="Sayi 6" required />
+
+                <div className="row">
+                    <div className="col">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Sonuc</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id='result'>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-
-            <div className="row">
-                <div className="col-md-12">
-                    <input id='TargetNumberInput' className="target" type="text" onKeyPress={() => isInputNumberThree(event)} maxLength="3" placeholder="Hedef Sayi" required />
-
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-md-6">
-                    <button onClick={() => randomNumber()} type="button"> Rastgele Sayı Oluştur </button>
-
-                </div>
-                <div className="col-md-6">
-                    <button onClick={() => getCountdownSolver()} type="button"> Sonuçları Görüntüle </button>
-
-                </div>
-            </div>
-
-            <div className="row col">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Sonuc</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td id='result'>
-
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </Layout>
     )
 }

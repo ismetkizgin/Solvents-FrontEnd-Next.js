@@ -1,10 +1,18 @@
-h1 {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 45px;
+.pagecenter{
+    display: table-cell;
+    vertical-align:middle;
+    width: 100vw;
+    height: 100vh;
 }
 
-.Number,
-.Letter {
+h1 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Geneva, Tahoma, sans-serif;
+    font-size: 45px;
+    text-align: center;
+    color: white;
+}
+
+.input {
     text-align: center;
     border-radius: 15px;
     width: 100px;
@@ -13,6 +21,7 @@ h1 {
     opacity: 0.8;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     position: relative;
+    border: 0;
 }
 
 .target {
@@ -21,14 +30,22 @@ h1 {
     width: 300px;
     height: 100px;
     opacity: 0.8;
+    border: 0;
 }
 
-button {
+.button {
+    background-color: slateblue;
+    color: aqua;
+    padding: 15px 32px;
     text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
     border-radius: 15px;
     width: 300px;
     height: 100px;
     font-size: 110%;
+    border: 0;
 }
 
 div {
@@ -41,13 +58,35 @@ button {
     color: turquoise;
 }
 
-.row {
-    text-align: center;
+i {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+a {
+    color: rgb(204, 0, 153);
+    font-size: 30px;
+    width: 50px;
+}
+
+a:hover {
+    color: aqua;
+    text-decoration: none;
+}
+
+.icon {
+    color: white;
+    font-size: 50px;
+}
+
+.icon:hover {
+    color: aqua;
+    text-decoration: none;
 }
 
 html,
 body {
     height: 100%;
+    width: 100%;
 }
 
 body {
@@ -55,15 +94,7 @@ body {
     background: linear-gradient(45deg, #49a09d, #5f2c82);
     font-family: sans-serif;
     font-weight: 100;
-}
-
-.container,
-.container-fluid {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    background-attachment: fixed;
 }
 
 table {
@@ -108,6 +139,3 @@ tbody td:hover:before {
     background-color: rgba(255, 255, 255, 0.2);
     z-index: -1;
 }
-
-
-/*# sourceMappingURL=styles.css.map */
