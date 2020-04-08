@@ -25,6 +25,10 @@ const isInputNumberThree = (evnt) => {
 }
 
 const getCountdownSolver = async () => {
+    document.getElementById("result-table").style.display = "block";
+    document.getElementById("loading-gif").style.display = "block";
+    document.getElementById("result").style.display = "none";
+
     let numbers = [];
     let target;
 
@@ -34,6 +38,9 @@ const getCountdownSolver = async () => {
     target = parseInt($('#TargetNumberInput').val());
 
     const data = await Request('/countdownsolver/' + numbers + '/' + target);
+
+    document.getElementById("loading-gif").style.display = "none";
+    document.getElementById("result").style.display = "block";
     $('#result').html(data.result);
 }
 
@@ -87,7 +94,7 @@ function CountdownSolverPage() {
                     </div>
                 </div>
 
-                <div className="row">
+                <div id="result-table" className="row">
                     <div className="col">
                         <table>
                             <thead>
@@ -97,6 +104,9 @@ function CountdownSolverPage() {
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td id='loading-gif'>
+                                        <img src={require("../public/images/loading.gif").default} />
+                                    </td>
                                     <td id='result'>
 
                                     </td>

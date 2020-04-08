@@ -1,3 +1,11 @@
+#loading-gif{
+    display: none;
+}
+
+#result-table{
+    display: none;
+}
+
 .pagecenter{
     display: table-cell;
     vertical-align:middle;
@@ -35,7 +43,7 @@ h1 {
 
 .button {
     background-color: slateblue;
-    color: aqua;
+    color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
