@@ -13,8 +13,8 @@ const keyUp = () => {
 
 const getWordSolver = async () => {
     document.getElementById("result-table").style.display = "block";
-    document.getElementById("result").style.display = "none";
     document.getElementById("loading-gif").style.display = "block";
+    document.getElementById("result").style.display = "none";
 
     let letters = [];
     for (let i = 0; i < 8; i++) {
@@ -25,7 +25,7 @@ const getWordSolver = async () => {
 
     document.getElementById("loading-gif").style.display = "none";
     document.getElementById("result").style.display = "block";
-    $('.target').val(data.word);
+    $('#result').html(data.word + '</br>(Başarım Puanı: ' + data.score + ")");
 }
 
 function WordSolverPage() {
@@ -64,14 +64,7 @@ function WordSolverPage() {
                     <input className="input" type="text" placeholder="Bonus Harf" disabled />
                 </div>
             </div>
-            <div id="result-table" className="row">
-                <div id="loading-gif" className="col-md-12">
-                    <img src={require("../public/images/loading.gif").default} />
-                </div>
-                <div id="result" className="col-md-12">
-                    <input className="target" type="text" placeholder="Sonuç" disabled />
-                </div>
-            </div>
+            
             <div className="row">
                 <div className="col-md-6">
                     <button onClick={() => randomLetter()} className="button" type="button">Rastgele Harf Oluştur</button>
@@ -79,6 +72,28 @@ function WordSolverPage() {
                 <div className="col-md-6">
                     <button onClick={() => getWordSolver()} className="button" type="button">Sonucu Göster</button>
 
+                </div>
+            </div>
+
+            <div id="result-table" className="row">
+                <div className="col">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sonuc</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id='loading-gif'>
+                                    <img src={require("../public/images/loading.gif").default} />
+                                </td>
+                                <td id='result'>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </Layout>

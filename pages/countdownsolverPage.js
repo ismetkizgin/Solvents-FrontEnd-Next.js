@@ -41,7 +41,7 @@ const getCountdownSolver = async () => {
 
     document.getElementById("loading-gif").style.display = "none";
     document.getElementById("result").style.display = "block";
-    $('#result').html(data.result);
+    $('#result').html(data.result + '(Başarım Puanı: ' + data.score + ")");
 }
 
 function CountdownSolverPage() {
