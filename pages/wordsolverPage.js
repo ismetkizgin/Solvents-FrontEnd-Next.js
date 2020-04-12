@@ -13,7 +13,7 @@ const keyUp = (evnt) => {
 const getWordSolver = async () => {
     let letters = [], state = true;
     for (let i = 0; i < 8; i++) {
-        letters[i] = $('#LetterInput' + (i + 1)).val();
+        letters[i] = document.getElementById('LetterInput' + (i + 1)).value;
         if (letters[i] === '' || letters[i] == null) {
             state = false;
         }
@@ -28,7 +28,7 @@ const getWordSolver = async () => {
 
         document.getElementById("loading-gif").style.display = "none";
         document.getElementById("result").style.display = "block";
-        $('#result').html(data.word + '</br>(Başarım Puanı: ' + data.score + ")");
+        document.getElementById('result').innerHTML = data.word + '</br>(Başarım Puanı: ' + data.score + ")";
     }
     else {
         alert('Lütfen tüm değerleri giriniz...');
