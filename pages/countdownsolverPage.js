@@ -25,97 +25,108 @@ const isInputNumberThree = (evnt) => {
 }
 
 const getCountdownSolver = async () => {
-    document.getElementById("result-table").style.display = "block";
-    document.getElementById("loading-gif").style.display = "block";
-    document.getElementById("result").style.display = "none";
-
-    let numbers = [];
-    let target;
-
+    let numbers = [], state = true, target, input;
     for (let i = 0; i < 6; i++) {
-        numbers[i] = parseInt($('#NumberInput' + (i + 1)).val());
+        input = document.getElementById('NumberInput' + (i + 1));
+        if (input.value === '' || input.value == null) {
+            state = false;
+        }
+        numbers[i] = parseInt(input.value);
     }
-    target = parseInt($('#TargetNumberInput').val());
+    input = document.getElementById('TargetNumberInput');
+    target = parseInt(input.value);
+    if (target === '' || target == null) {
+        state = false;
+    }
 
-    const data = await Request('/countdownsolver/' + numbers + '/' + target);
+    if (state) {
+        document.getElementById("result-table").style.display = "block";
+        document.getElementById("loading-gif").style.display = "block";
+        document.getElementById("result").style.display = "none";
 
-    document.getElementById("loading-gif").style.display = "none";
-    document.getElementById("result").style.display = "block";
-    $('#result').html(data.result + '(Başarım Puanı: ' + data.score + ")");
+        const data = await Request('/countdownsolver/' + numbers + '/' + target);
+
+        document.getElementById("loading-gif").style.display = "none";
+        document.getElementById("result").style.display = "block";
+        $('#result').html(data.result + '(Başarım Puanı: ' + data.score + ")");
+    }
+    else {
+        alert('Lütfen tüm değerleri giriniz...');
+    }
 }
 
 function CountdownSolverPage() {
     return (<Layout title='Sayı Çözücü'>
         <Link href="/"><a className="d-flex justify-content-start align-items-center icon"><i className="fas fa-chevron-circle-left"></i></a></Link>
 
-            <div className="container">
-                <h1>SAYI ÇÖCÜZÜ</h1>
-                <div className="row">
-                    <div className="col-md-2">
-                        <input id='NumberInput1' className="input" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 1" required />
+        <div className="container">
+            <h1>SAYI ÇÖCÜZÜ</h1>
+            <div className="row">
+                <div className="col-md-2">
+                    <input id='NumberInput1' className="input" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 1" required />
 
-                    </div>
-                    <div className="col-md-2">
-                        <input id='NumberInput2' className="input" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 2" required />
-
-                    </div>
-                    <div className="col-md-2">
-                        <input id='NumberInput3' className="input" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 3" required />
-
-                    </div>
-                    <div className="col-md-2">
-                        <input id='NumberInput4' className="input" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 4" required />
-
-                    </div>
-                    <div className="col-md-2">
-                        <input id='NumberInput5' className="input" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 5" required />
-
-                    </div>
-                    <div className="col-md-2">
-                        <input id='NumberInput6' className="input" type="text" onKeyPress={() => isInputNumberTwo(event)} maxLength="2" placeholder="Sayi 6" required />
-                    </div>
                 </div>
+                <div className="col-md-2">
+                    <input id='NumberInput2' className="input" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 2" required />
 
-                <div className="row">
-                    <div className="col-md-12">
-                        <input id='TargetNumberInput' className="target" type="text" onKeyPress={() => isInputNumberThree(event)} maxLength="3" placeholder="Hedef Sayi" required />
-
-                    </div>
                 </div>
+                <div className="col-md-2">
+                    <input id='NumberInput3' className="input" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 3" required />
 
-                <div className="row">
-                    <div className="col-md-6">
-                        <button onClick={() => randomNumber()} className="button" type="button"> Rastgele Sayı Oluştur </button>
-
-                    </div>
-                    <div className="col-md-6">
-                        <button onClick={() => getCountdownSolver()} className="button" type="button"> Sonuçları Görüntüle </button>
-
-                    </div>
                 </div>
+                <div className="col-md-2">
+                    <input id='NumberInput4' className="input" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 4" required />
 
-                <div id="result-table" className="row">
-                    <div className="col">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Sonuc</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td id='loading-gif'>
-                                        <img src={require("../public/images/loading.gif").default} />
-                                    </td>
-                                    <td id='result'>
+                </div>
+                <div className="col-md-2">
+                    <input id='NumberInput5' className="input" type="text" onKeyPress={() => isInputNumberOne(event)} maxLength="1" placeholder="Sayi 5" required />
 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                </div>
+                <div className="col-md-2">
+                    <input id='NumberInput6' className="input" type="text" onKeyPress={() => isInputNumberTwo(event)} maxLength="2" placeholder="Sayi 6" required />
                 </div>
             </div>
+
+            <div className="row">
+                <div className="col-md-12">
+                    <input id='TargetNumberInput' className="target" type="text" onKeyPress={() => isInputNumberThree(event)} maxLength="3" placeholder="Hedef Sayi" required />
+
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-md-6">
+                    <button onClick={() => randomNumber()} className="button" type="button"> Rastgele Sayı Oluştur </button>
+
+                </div>
+                <div className="col-md-6">
+                    <button onClick={() => getCountdownSolver()} className="button" type="button"> Sonuçları Görüntüle </button>
+
+                </div>
+            </div>
+
+            <div id="result-table" className="row">
+                <div className="col">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sonuc</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id='loading-gif'>
+                                    <img src={require("../public/images/loading.gif").default} />
+                                </td>
+                                <td id='result'>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </Layout>
     )
 }

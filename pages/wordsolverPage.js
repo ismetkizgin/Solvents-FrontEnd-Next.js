@@ -3,29 +3,36 @@ import { randomLetter } from '../public/js/random';
 import Request from '../api/request';
 import Link from 'next/link'
 
-const keyUp = () => {
-    $(".input").keyup(function () {
-        if (this.value.match(/[^a-zA-Z]/g)) {
-            this.value = this.value.replace(/[^a-zA-Z]/g, '');
-        }
-    });
+const keyUp = (evnt) => {
+    var krt = String.fromCharCode(evnt.which);
+    if (!(/^[a-zA-Z|çşığü]+$/.test(krt))) {
+        evnt.preventDefault();
+    }
 }
 
 const getWordSolver = async () => {
-    document.getElementById("result-table").style.display = "block";
-    document.getElementById("loading-gif").style.display = "block";
-    document.getElementById("result").style.display = "none";
-
-    let letters = [];
+    let letters = [], state = true;
     for (let i = 0; i < 8; i++) {
         letters[i] = $('#LetterInput' + (i + 1)).val();
+        if (letters[i] === '' || letters[i] == null) {
+            state = false;
+        }
     }
 
-    const data = await Request('/wordsolver/' + letters);
+    if (state) {
+        document.getElementById("result-table").style.display = "block";
+        document.getElementById("loading-gif").style.display = "block";
+        document.getElementById("result").style.display = "none";
 
-    document.getElementById("loading-gif").style.display = "none";
-    document.getElementById("result").style.display = "block";
-    $('#result').html(data.word + '</br>(Başarım Puanı: ' + data.score + ")");
+        const data = await Request('/wordsolver/' + letters);
+
+        document.getElementById("loading-gif").style.display = "none";
+        document.getElementById("result").style.display = "block";
+        $('#result').html(data.word + '</br>(Başarım Puanı: ' + data.score + ")");
+    }
+    else {
+        alert('Lütfen tüm değerleri giriniz...');
+    }
 }
 
 function WordSolverPage() {
@@ -37,34 +44,34 @@ function WordSolverPage() {
 
             <div className="row">
                 <div className="col">
-                    <input id='LetterInput1' onKeyPress={() => { keyUp() }} className="input" type="text" maxLength="1" placeholder="Harf 1" required />
+                    <input id='LetterInput1' onKeyPress={() => { keyUp(event) }} className="input" type="text" maxLength="1" placeholder="Harf 1" required />
                 </div>
                 <div className="col">
-                    <input id='LetterInput2' onKeyPress={() => { keyUp() }} className="input" type="text" maxLength="1" placeholder="Harf 2" required />
+                    <input id='LetterInput2' onKeyPress={() => { keyUp(event) }} className="input" type="text" maxLength="1" placeholder="Harf 2" required />
                 </div>
                 <div className="col">
-                    <input id='LetterInput3' onKeyPress={() => { keyUp() }} className="input" type="text" maxLength="1" placeholder="Harf 3" required />
+                    <input id='LetterInput3' onKeyPress={() => { keyUp(event) }} className="input" type="text" maxLength="1" placeholder="Harf 3" required />
                 </div>
                 <div className="col">
-                    <input id='LetterInput4' onKeyPress={() => { keyUp() }} className="input" type="text" maxLength="1" placeholder="Harf 4" required />
+                    <input id='LetterInput4' onKeyPress={() => { keyUp(event) }} className="input" type="text" maxLength="1" placeholder="Harf 4" required />
                 </div>
                 <div className="col">
-                    <input id='LetterInput5' onKeyPress={() => { keyUp() }} className="input" type="text" maxLength="1" placeholder="Harf 5" required />
+                    <input id='LetterInput5' onKeyPress={() => { keyUp(event) }} className="input" type="text" maxLength="1" placeholder="Harf 5" required />
                 </div>
                 <div className="col">
-                    <input id='LetterInput6' onKeyPress={() => { keyUp() }} className="input" type="text" maxLength="1" placeholder="Harf 6" required />
+                    <input id='LetterInput6' onKeyPress={() => { keyUp(event) }} className="input" type="text" maxLength="1" placeholder="Harf 6" required />
                 </div>
                 <div className="col">
-                    <input id='LetterInput7' onKeyPress={() => { keyUp() }} className="input" type="text" maxLength="1" placeholder="Harf 7" required />
+                    <input id='LetterInput7' onKeyPress={() => { keyUp(event) }} className="input" type="text" maxLength="1" placeholder="Harf 7" required />
                 </div>
                 <div className="col">
-                    <input id='LetterInput8' onKeyPress={() => { keyUp() }} className="input" type="text" maxLength="1" placeholder="Harf 8" required />
+                    <input id='LetterInput8' onKeyPress={() => { keyUp(event) }} className="input" type="text" maxLength="1" placeholder="Harf 8" required />
                 </div>
                 <div className="col">
                     <input className="input" type="text" placeholder="Bonus Harf" disabled />
                 </div>
             </div>
-            
+
             <div className="row">
                 <div className="col-md-6">
                     <button onClick={() => randomLetter()} className="button" type="button">Rastgele Harf Oluştur</button>
