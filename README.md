@@ -1,5 +1,15 @@
 # Solvents Front-end Project
 
+#### Project Setup
+```
+    npm install
+```
+#### Compiles and hot-reloads for development
+```
+    npm run dev
+```
+</br>
+</br>
 Requesting Restful API, the feedback of the desired answers is provided.
 
 ### Home Page
