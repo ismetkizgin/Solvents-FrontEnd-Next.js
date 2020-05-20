@@ -3,9 +3,8 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "dev": "node app.js",
-        "build": "next build",
-        "start": "next start"
+        "start": "node app.js",
+        "build": "next build"
     },
     "dependencies": {
         "@zeit/next-css": "^1.0.1",
