@@ -2,7 +2,7 @@ const express = require('express');
 const next = require('next');
 const config = require('./config');
 
-const PORT = config.PORT;
+const PORT = process.env.PORT || config.PORT;
 
 const dev = config.NODE_ENV;
 const app = next({ dev });
