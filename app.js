@@ -13,7 +13,7 @@ app.prepare()
         const server = express();
 
         server.get('/', (req,res) => {
-            app.render(req,res,'/wordsolverPage');
+            app.render(req,res,'/');
         });
 
         server.get('/kelimecozucu', (req,res) => {
