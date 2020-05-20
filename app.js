@@ -12,6 +12,10 @@ app.prepare()
     .then(() => {
         const server = express();
 
+        server.get('/', (req,res) => {
+            app.render(req,res,'/wordsolverPage');
+        });
+
         server.get('/kelimecozucu', (req,res) => {
             app.render(req,res,'/wordsolverPage');
         });
