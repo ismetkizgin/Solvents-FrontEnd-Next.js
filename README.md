@@ -1,6 +1,6 @@
 # Solvents Front-end Project
 
-#### Project Setup
+#### Installation Instructions
 ```
     npm install
 ```
