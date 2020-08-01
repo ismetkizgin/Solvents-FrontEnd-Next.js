@@ -44,7 +44,7 @@ const getCountdownSolver = async () => {
         document.getElementById("loading-gif").style.display = "block";
         document.getElementById("result").style.display = "none";
 
-        const data = await Request('/countdownsolver/' + numbers + '/' + target);
+        const data = await Request('/countdownsolver', 'POST', { numbers: numbers.toString(), target });
 
         document.getElementById("loading-gif").style.display = "none";
         document.getElementById("result").style.display = "block";

@@ -24,7 +24,7 @@ const getWordSolver = async () => {
         document.getElementById("loading-gif").style.display = "block";
         document.getElementById("result").style.display = "none";
 
-        const data = await Request('/wordsolver/' + letters);
+        const data = await Request('/wordsolver', 'POST', { letters: letters.toString() });
 
         document.getElementById("loading-gif").style.display = "none";
         document.getElementById("result").style.display = "block";
